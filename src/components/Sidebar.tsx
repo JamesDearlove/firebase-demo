@@ -1,6 +1,6 @@
 import React from "react";
 import { Avatar, Box, makeStyles, Paper, Typography } from "@material-ui/core";
-import { grey } from "@material-ui/core/colors"
+import { grey } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
   sidebar: {
