@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Avatar,
   Box,
@@ -7,8 +7,11 @@ import {
   Typography,
   Paper,
 } from "@material-ui/core";
+import FavoriteIcon from "@material-ui/icons/Favorite";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import CommentIcon from "@material-ui/icons/Comment";
+import { Post } from "../types";
+import { sampleAuthors } from "../sampleData";
 
 const useStyles = makeStyles((theme) => ({
   postPaper: {
@@ -29,45 +32,68 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "row",
     alignItems: "center",
   },
+  liked: {
+    color: theme.palette.secondary.main,
+  },
 }));
 
-export interface TimelinePostProps {
-  content: string;
-  author: string;
-  authorId: string;
-  likes: number;
-  comments: string[];
-}
-
-const PostActions = (props: TimelinePostProps) => {
+/**
+ * The post actions, like or comment, for a post.
+ * @param props.post Post to display for
+ */
+const PostActions = (props: { post: Post }) => {
   const classes = useStyles();
+
+  const [liked, setLiked] = useState(false);
+
+  onEffect(() => {
+    setLiked(false);
+  }, [])
+
+  const onCommentClick = () => {};
+
+  const onLikeClick = () => {
+    // TODO: Firestore - Toggle user liked state.
+  };
 
   return (
     <Box className={classes.actionsBox}>
-      <IconButton>
+      <IconButton onClick={onCommentClick}>
         <CommentIcon />
       </IconButton>
       <Box className={classes.actionsBox}>
-        <IconButton>
-          <FavoriteBorderIcon />
+        <IconButton onClick={onLikeClick}>
+          {liked ? (
+            <FavoriteIcon className={classes.liked} />
+          ) : (
+            <FavoriteBorderIcon />
+          )}
         </IconButton>
-        <Typography>{props.likes}</Typography>
+        <Typography>{props.post.liked.length}</Typography>
       </Box>
     </Box>
   );
 };
 
-export const TimelinePost = (props: TimelinePostProps) => {
+export const TimelinePost = (props: { post: Post }) => {
   const classes = useStyles();
+
+  const author = sampleAuthors.find(
+    (author) => author.id === props.post.author
+  );
 
   return (
     <Paper className={classes.postPaper}>
       <Box className={classes.authorBox}>
-        <Avatar alt={props.author}>{props.author[0]}</Avatar>
-        <Typography className={classes.authorText}>{props.author}</Typography>
+        <Avatar alt={props.post.author}>{author?.name[0]}</Avatar>
+        <Typography className={classes.authorText}>{author?.name}</Typography>
       </Box>
-      <Typography>{props.content}</Typography>
-      <PostActions {...props} />
+      <Typography>{props.post.content}</Typography>
+      <PostActions post={props.post} />
     </Paper>
   );
 };
+function onEffect(arg0: () => void, arg1: never[]) {
+  throw new Error("Function not implemented.");
+}
+

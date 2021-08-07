@@ -1,6 +1,7 @@
 import React from "react";
 import { Avatar, Box, makeStyles, Paper, Typography } from "@material-ui/core";
 import { grey } from "@material-ui/core/colors";
+import TopChrips from "./TopChrips";
 
 const useStyles = makeStyles((theme) => ({
   sidebar: {
@@ -24,12 +25,16 @@ const useStyles = makeStyles((theme) => ({
 const UserPanel = () => {
   const classes = useStyles();
 
+  // TODO: Authentication - Get current logged in user.
+  const username = "Jimmy";
+
   return (
     <>
       <Box className={classes.userBoxBanner} />
       <Box className={classes.userBox}>
-        <Avatar>J</Avatar>
-        <Typography className={classes.userName}>James Dearlove</Typography>
+        {/* TODO: Authentication - Change to get the user's profile image. */}
+        <Avatar>{username[0]}</Avatar>
+        <Typography className={classes.userName}>{username}</Typography>
       </Box>
     </>
   );
@@ -39,9 +44,14 @@ const Sidebar = () => {
   const classes = useStyles();
 
   return (
-    <Paper className={classes.sidebar}>
-      <UserPanel />
-    </Paper>
+    <>
+      <Paper className={classes.sidebar}>
+        <UserPanel />
+      </Paper>
+      <Paper className={classes.sidebar}>
+        <TopChrips />
+      </Paper>
+    </>
   );
 };
 
