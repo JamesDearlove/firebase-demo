@@ -1,3 +1,6 @@
+// This file contains example data to stand in
+// for the data that will be provided by Firebase.
+
 import { Post, Author } from "./types";
 
 export const sampleAuthors: Author[] = [
@@ -13,6 +16,7 @@ export const sampleAuthors: Author[] = [
 
 export const samplePosts: Post[] = [
   {
+    id: "abc1",
     content: "Hi Mum!",
     author: "abcd123",
     comments: [],
@@ -20,6 +24,7 @@ export const samplePosts: Post[] = [
     postTime: new Date(),
   },
   {
+    id: "abc2",
     content: "Have you heard the good news of #TheOwlHouseSeason2?",
     author: "abcd123",
     comments: [],
@@ -27,6 +32,7 @@ export const samplePosts: Post[] = [
     postTime: new Date(),
   },
   {
+    id: "abc3",
     content:
       "Not everything is as it seems at face value. " +
       "Sometimes you need to look beneath the surface. " +
@@ -37,6 +43,7 @@ export const samplePosts: Post[] = [
     postTime: new Date(),
   },
   {
+    id: "abc4",
     content: "Why are you reading these?",
     author: "abce123",
     comments: [],
@@ -44,6 +51,7 @@ export const samplePosts: Post[] = [
     postTime: new Date(),
   },
   {
+    id: "abc5",
     content: "Hoot hoot",
     author: "abcd123",
     comments: [],

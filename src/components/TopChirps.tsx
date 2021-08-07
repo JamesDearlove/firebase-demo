@@ -26,11 +26,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const TopChirp = (props: Post) => {
+/**
+ * Render single post as top post.
+ */
+const TopChirp = (props: {post: Post} ) => {
   const classes = useStyles();
 
   // TODO: Firestore - Get author information.
-  const author = sampleAuthors.find((author) => author.id === props.author);
+  const author = sampleAuthors.find((author) => author.id === props.post.author);
 
   return (
     <Box>
@@ -39,13 +42,16 @@ const TopChirp = (props: Post) => {
           <Avatar>{author?.name[0]}</Avatar>
           <Typography className={classes.authorName}>{author?.name}</Typography>
         </Box>
-        <Typography>{props.liked.length}</Typography>
+        <Typography>{props.post.liked.length}</Typography>
       </Paper>
     </Box>
   );
 };
 
-const TopChrips = () => {
+/**
+ * Top chirps sidebar panel.
+ */
+const Topchirps = () => {
   const classes = useStyles();
 
   // TODO: Firestore - Get top Chirps from Firestore.
@@ -57,12 +63,12 @@ const TopChrips = () => {
     <>
       <Box className={classes.topBox}>
         <Typography variant="h5">Top Chirps</Typography>
-        {topPosts.map((posts) => (
-          <TopChirp {...posts} />
+        {topPosts.map((post) => (
+          <TopChirp key={post.id} post={post} />
         ))}
       </Box>
     </>
   );
 };
 
-export default TopChrips;
+export default Topchirps;

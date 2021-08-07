@@ -5,6 +5,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { useEffect } from "react";
+import { Box, Popover } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -16,8 +17,61 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
+  loginPopover: {
+    padding: theme.spacing(1),
+  },
 }));
 
+/**
+ * Button to handle the login, and login dialog.
+ */
+const LoginButton = () => {
+  const classes = useStyles();
+  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
+    null
+  );
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? "simple-popover" : undefined;
+
+  return (
+    <>
+      <Button color="inherit" onClick={handleClick}>
+        Login
+      </Button>
+      <Popover
+        id={id}
+        open={open}
+        anchorEl={anchorEl}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "right",
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
+      >
+        <Box className={classes.loginPopover}>
+          <Typography>An empty login popover.</Typography>
+        </Box>
+      </Popover>
+    </>
+  );
+};
+
+/**
+ * App bar that sits across the top of the app.
+ */
 const MenuBar = () => {
   const classes = useStyles();
 
@@ -27,10 +81,6 @@ const MenuBar = () => {
     // TODO: Authentication - Check if logged in
     setLoggedIn(false);
   }, []);
-
-  const handleLoginClick = () => {
-    // TODO: Authentication - Login 
-  };
 
   const handleLogoutClick = () => {
     // TODO: Authentication - Logout user
@@ -44,13 +94,11 @@ const MenuBar = () => {
             Firechirp
           </Typography>
           {loggedIn ? (
-            <Button color="inherit" onClick={handleLoginClick}>
+            <Button color="inherit" onClick={handleLogoutClick}>
               Logout
             </Button>
           ) : (
-            <Button color="inherit" onClick={handleLogoutClick}>
-              Login
-            </Button>
+            <LoginButton />
           )}
         </Toolbar>
       </AppBar>

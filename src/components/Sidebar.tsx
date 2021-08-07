@@ -1,7 +1,7 @@
 import React from "react";
 import { Avatar, Box, makeStyles, Paper, Typography } from "@material-ui/core";
 import { grey } from "@material-ui/core/colors";
-import TopChrips from "./TopChrips";
+import TopChirps from "./TopChirps";
 
 const useStyles = makeStyles((theme) => ({
   sidebar: {
@@ -22,6 +22,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+/**
+ * User panel component for the sidebar.
+ */
 const UserPanel = () => {
   const classes = useStyles();
 
@@ -40,6 +43,9 @@ const UserPanel = () => {
   );
 };
 
+/**
+ * Sidebar parent to the user info panel and the top chirps
+ */
 const Sidebar = () => {
   const classes = useStyles();
 
@@ -49,7 +55,7 @@ const Sidebar = () => {
         <UserPanel />
       </Paper>
       <Paper className={classes.sidebar}>
-        <TopChrips />
+        <TopChirps />
       </Paper>
     </>
   );

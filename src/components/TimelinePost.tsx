@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Avatar,
   Box,
@@ -39,14 +39,14 @@ const useStyles = makeStyles((theme) => ({
 
 /**
  * The post actions, like or comment, for a post.
- * @param props.post Post to display for
+ * @param props.post Post the buttons represent.
  */
 const PostActions = (props: { post: Post }) => {
   const classes = useStyles();
 
   const [liked, setLiked] = useState(false);
 
-  onEffect(() => {
+  useEffect(() => {
     setLiked(false);
   }, [])
 
@@ -75,6 +75,10 @@ const PostActions = (props: { post: Post }) => {
   );
 };
 
+/**
+ * Display the given post in a timeline format.
+ * @param props.post Post to display.
+ */
 export const TimelinePost = (props: { post: Post }) => {
   const classes = useStyles();
 
@@ -93,7 +97,3 @@ export const TimelinePost = (props: { post: Post }) => {
     </Paper>
   );
 };
-function onEffect(arg0: () => void, arg1: never[]) {
-  throw new Error("Function not implemented.");
-}
-

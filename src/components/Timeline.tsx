@@ -11,6 +11,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+/**
+ * Timeline which contains the posts and the create post component.
+ */
 const Timeline = () => {
   const classes = useStyles();
 

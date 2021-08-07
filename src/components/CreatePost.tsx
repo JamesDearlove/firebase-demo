@@ -17,6 +17,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+/**
+ * Post creation box at the top of the timeline.
+ */
 const CreatePost = () => {
   const classes = useStyles();
   const [postContent, setPostContent] = useState("")
