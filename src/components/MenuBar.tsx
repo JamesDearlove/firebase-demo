@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
   },
   loginPopover: {
     padding: theme.spacing(1),
+    width: 300,
   },
 }));
 
@@ -53,12 +54,12 @@ const LoginButton = () => {
         anchorEl={anchorEl}
         onClose={handleClose}
         anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "right",
+          vertical: 'bottom',
+          horizontal: 'right',
         }}
         transformOrigin={{
-          vertical: "top",
-          horizontal: "right",
+          vertical: 'top',
+          horizontal: 'right',
         }}
       >
         <Box className={classes.loginPopover}>
