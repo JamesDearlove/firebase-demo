@@ -11,7 +11,6 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import CommentIcon from "@material-ui/icons/Comment";
 import { Post } from "../types";
-import { sampleAuthors } from "../sampleData";
 
 const useStyles = makeStyles((theme) => ({
   postPaper: {
@@ -48,7 +47,7 @@ const PostActions = (props: { post: Post }) => {
 
   useEffect(() => {
     setLiked(false);
-  }, [])
+  }, []);
 
   const onCommentClick = () => {};
 
@@ -82,15 +81,13 @@ const PostActions = (props: { post: Post }) => {
 export const TimelinePost = (props: { post: Post }) => {
   const classes = useStyles();
 
-  const author = sampleAuthors.find(
-    (author) => author.id === props.post.author
-  );
-
   return (
     <Paper className={classes.postPaper}>
       <Box className={classes.authorBox}>
-        <Avatar alt={props.post.author}>{author?.name[0]}</Avatar>
-        <Typography className={classes.authorText}>{author?.name}</Typography>
+        <Avatar alt={props.post.author}>{props.post.author[0]}</Avatar>
+        <Typography className={classes.authorText}>
+          {props.post.author}
+        </Typography>
       </Box>
       <Typography>{props.post.content}</Typography>
       <PostActions post={props.post} />

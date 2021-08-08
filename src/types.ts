@@ -2,16 +2,11 @@
 // should look like.
 
 export interface Post {
-  id: string;
+  id?: string;
   content: string;
   author: string;
+  authorId: string;
   liked: string[];
-  comments: Post[];
+  comments?: Post[];
   postTime: Date;
-}
-
-export interface Author {
-  id: string;
-  name: string;
-  imageUrl?: string;
 }

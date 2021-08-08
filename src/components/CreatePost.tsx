@@ -22,15 +22,15 @@ const useStyles = makeStyles((theme) => ({
  */
 const CreatePost = () => {
   const classes = useStyles();
-  const [postContent, setPostContent] = useState("")
+  const [postContent, setPostContent] = useState("");
 
-  const handleClick = (() => {
+  const handleClick = () => {
     // TODO: Firestore - Create new post
-  });
+  };
 
-  const handleChange = ((event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPostContent(event.target.value);
-  })
+  };
 
   return (
     <Paper className={classes.paper}>

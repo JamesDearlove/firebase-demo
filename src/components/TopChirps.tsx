@@ -1,6 +1,6 @@
 import React from "react";
 import { Avatar, Box, makeStyles, Paper, Typography } from "@material-ui/core";
-import { sampleAuthors, samplePosts } from "../sampleData";
+import { samplePosts } from "../sampleData";
 import { Post } from "../types";
 
 const useStyles = makeStyles((theme) => ({
@@ -32,15 +32,12 @@ const useStyles = makeStyles((theme) => ({
 const TopChirp = (props: {post: Post} ) => {
   const classes = useStyles();
 
-  // TODO: Firestore - Get author information.
-  const author = sampleAuthors.find((author) => author.id === props.post.author);
-
   return (
     <Box>
       <Paper className={classes.paper}>
         <Box className={classes.authorBox}>
-          <Avatar>{author?.name[0]}</Avatar>
-          <Typography className={classes.authorName}>{author?.name}</Typography>
+          <Avatar>{props.post.author[0]}</Avatar>
+          <Typography className={classes.authorName}>{props.post.author}</Typography>
         </Box>
         <Typography>{props.post.liked.length}</Typography>
       </Paper>
