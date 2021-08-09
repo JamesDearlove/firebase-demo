@@ -2,7 +2,6 @@
 // should look like.
 
 export interface Post {
-  id?: string;
   content: string;
   author: string;
   authorId: string;

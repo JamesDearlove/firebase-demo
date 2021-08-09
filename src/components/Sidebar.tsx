@@ -1,6 +1,5 @@
 import React from "react";
 import { makeStyles, Paper } from "@material-ui/core";
-import TopChirps from "./TopChirps";
 import UserPanel from "./UserPanel";
 
 const useStyles = makeStyles((theme) => ({
@@ -20,9 +19,10 @@ const Sidebar = () => {
       <Paper className={classes.sidebar}>
         <UserPanel />
       </Paper>
-      <Paper className={classes.sidebar}>
+      {/* I've disabled this because I was short on time, feel free to give it a shot! */}
+      {/* <Paper className={classes.sidebar}>
         <TopChirps />
-      </Paper>
+      </Paper> */}
     </>
   );
 };

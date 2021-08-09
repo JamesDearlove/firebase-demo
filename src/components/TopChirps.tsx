@@ -60,8 +60,8 @@ const Topchirps = () => {
     <>
       <Box className={classes.topBox}>
         <Typography variant="h5">Top Chirps</Typography>
-        {topPosts.map((post) => (
-          <TopChirp key={post.id} post={post} />
+        {topPosts.map((post, index) => (
+          <TopChirp key={index} post={post} />
         ))}
       </Box>
     </>
