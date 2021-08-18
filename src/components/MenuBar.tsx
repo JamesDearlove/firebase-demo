@@ -6,6 +6,8 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { useEffect } from "react";
 import { Box, Popover } from "@material-ui/core";
+import firebase, { authUiConfig } from "../firebase";
+import { StyledFirebaseAuth } from "react-firebaseui";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -54,16 +56,19 @@ const LoginButton = () => {
         anchorEl={anchorEl}
         onClose={handleClose}
         anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'right',
+          vertical: "bottom",
+          horizontal: "right",
         }}
         transformOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
+          vertical: "top",
+          horizontal: "right",
         }}
       >
         <Box className={classes.loginPopover}>
-          <Typography>An empty login popover.</Typography>
+          <StyledFirebaseAuth
+            uiConfig={authUiConfig}
+            firebaseAuth={firebase.auth()}
+          />
         </Box>
       </Popover>
     </>
@@ -79,12 +84,18 @@ const MenuBar = () => {
   const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
-    // TODO: Authentication - Check if logged in
-    setLoggedIn(false);
+    const unregisterAuthObserver = firebase
+      .auth()
+      .onAuthStateChanged((user) => {
+        setLoggedIn(!!user);
+      });
+
+    return () => unregisterAuthObserver();
   }, []);
 
   const handleLogoutClick = () => {
     // TODO: Authentication - Logout user
+    firebase.auth().signOut();
   };
 
   return (

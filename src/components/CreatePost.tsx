@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { IconButton, InputBase, makeStyles, Paper } from "@material-ui/core";
 import SendIcon from "@material-ui/icons/Send";
+import firebase, { postsRef } from "../firebase";
+import { Post } from "../types";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -26,6 +28,19 @@ const CreatePost = () => {
 
   const handleClick = () => {
     // TODO: Firestore - Create new post
+    const author = firebase.auth().currentUser;
+
+    if (author) {
+      const newPost: Post = {
+        content: postContent,
+        author: author.displayName || "No name",
+        authorId: author.uid,
+        postTime: new Date(),
+        liked: [],
+      };
+      postsRef.add(newPost);
+      setPostContent("");
+    }
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

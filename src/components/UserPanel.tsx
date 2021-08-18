@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Avatar, Box, makeStyles, Typography } from "@material-ui/core";
 import { grey } from "@material-ui/core/colors";
+import firebase from "../firebase";
 
 const useStyles = makeStyles((theme) => ({
   box: {
@@ -26,19 +27,35 @@ const UserPanel = () => {
 
   // TODO: Authentication - Get current logged in user.
   // TODO: This should also be handled in state.
-  const userName = "Jimmy";
+  // const userName = "Jimmy";
+  const [userName, setUserName] = useState<string | null | undefined>("");
+  const [userPicture, setUserPicture] = useState<string | null | undefined>("");
 
-  return (
+  useEffect(() => {
+    const unregisterAuthObserver = firebase
+      .auth()
+      .onAuthStateChanged((user) => {
+        setUserName(user?.displayName);
+        setUserPicture(user?.photoURL);
+      });
+
+    // Make sure we un-register Firebase observers when the component unmounts.
+    return () => unregisterAuthObserver();
+  }, []);
+
+  return userName ? (
     <>
       <Box className={classes.boxBanner} />
       <Box className={classes.box}>
         {/* TODO: Authentication - Change to get the user's profile image. */}
-        <Avatar alt={userName}>
+        <Avatar src={userPicture || ""} alt={userName}>
           {userName[0]}
         </Avatar>
         <Typography className={classes.userName}>{userName}</Typography>
       </Box>
     </>
+  ) : (
+    <></>
   );
 };
 
